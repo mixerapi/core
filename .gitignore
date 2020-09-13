@@ -1,6 +1,7 @@
 # MixerApi specific files #
 ############################
 /coverage-reports/
+/mixerapi_core_test
 
 # CakePHP specific files #
 ##########################

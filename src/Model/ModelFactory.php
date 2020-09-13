@@ -7,7 +7,6 @@ use Cake\Collection\Collection;
 use Cake\Datasource\ConnectionInterface;
 use Cake\Utility\Inflector;
 use MixerApi\Core\Utility\NamespaceUtility;
-use RuntimeException;
 
 class ModelFactory
 {
@@ -39,29 +38,34 @@ class ModelFactory
     }
 
     /**
-     * @return \MixerApi\Core\Model\Model
+     * @return \MixerApi\Core\Model\Model|null
      */
-    public function create(): Model
+    public function create(): ?Model
     {
         $tableName = $this->findTable();
-        $entityClass = Inflector::singularize(Inflector::classify($this->tableName));
-        $tableClass = Inflector::pluralize(Inflector::classify($tableName)) . 'Table';
 
-        $entityFqn = NamespaceUtility::findClass($this->namespace . '\Model\Entity', $entityClass);
+        if ($tableName === null) {
+            return null;
+        }
+
+        $tableClass = Inflector::pluralize(Inflector::classify($tableName)) . 'Table';
         $tableFqn = NamespaceUtility::findClass($this->namespace . '\Model\Table', $tableClass);
+        /** @var \Cake\ORM\Table $tableInstance */
+        $tableInstance = new $tableFqn();
+        $entityFqn = $tableInstance->getEntityClass();
 
         return new Model(
             $this->connection->getSchemaCollection()->describe($tableName),
-            new $tableFqn(),
+            $tableInstance,
             new $entityFqn()
         );
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      */
-    private function findTable(): string
+    private function findTable(): ?string
     {
         $tables = (new TableScanner($this->connection))->listUnskipped();
 
@@ -71,7 +75,7 @@ class ModelFactory
         });
 
         if ($results->count() === 0) {
-            throw new RuntimeException('Table not found');
+            return null;
         }
 
         return $results->first();
