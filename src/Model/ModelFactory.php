@@ -3,11 +3,8 @@ declare(strict_types=1);
 
 namespace MixerApi\Core\Model;
 
-use Cake\Collection\Collection;
 use Cake\Datasource\ConnectionInterface;
 use Cake\ORM\Table;
-use Cake\Utility\Inflector;
-use MixerApi\Core\Utility\NamespaceUtility;
 
 class ModelFactory
 {
