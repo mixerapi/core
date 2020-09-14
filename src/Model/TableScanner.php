@@ -24,6 +24,8 @@ use RuntimeException;
  *
  * Allows common infrastructure tables to be ignored based
  * parameters.
+ *
+ * @deprecated
  */
 class TableScanner
 {

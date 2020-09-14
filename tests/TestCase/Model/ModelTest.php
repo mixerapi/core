@@ -23,7 +23,10 @@ class ModelTest extends TestCase
 
     public function testModel()
     {
-        $model = $this->getModel('actors');
+        $model = (new ModelFactory(
+            ConnectionManager::get('default'),
+            new \TestApp\Model\Table\ActorsTable()
+        ))->create();
 
         $this->assertInstanceOf(Model::class, $model);
         $this->assertInstanceOf(Entity::class, $model->getEntity());
@@ -35,20 +38,15 @@ class ModelTest extends TestCase
 
     public function testModelProperty()
     {
-        $model = $this->getModel('actors');
+        $model = (new ModelFactory(
+            ConnectionManager::get('default'),
+            new \TestApp\Model\Table\ActorsTable()
+        ))->create();
+
         $this->assertTrue($model->getProperty('id')->isPrimaryKey());
         $this->assertEmpty($model->getProperty('first_name')->getDefault());
         $this->assertEquals('string', $model->getProperty('first_name')->getType());
         $this->assertEquals('first_name', $model->getProperty('first_name')->getName());
         $this->assertInstanceOf(ValidationSet::class, $model->getProperty('first_name')->getValidationSet());
-    }
-
-    private function getModel(string $table)
-    {
-        return (new ModelFactory(
-            ConnectionManager::get('default'),
-            'TestApp',
-            $table
-        ))->create();
     }
 }
