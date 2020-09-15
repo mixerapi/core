@@ -5,13 +5,6 @@ namespace MixerApi\Core\Model;
 
 use Cake\Validation\ValidationSet;
 
-/**
- * Class ModelProperty
- *
- * @package SwaggerBake\Lib\Decorator
- *
- * Decorates a table column
- */
 class ModelProperty
 {
     /**

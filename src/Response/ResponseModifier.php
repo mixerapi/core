@@ -8,12 +8,6 @@ use Cake\Event\EventManager;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 
-/**
- * CakePHP does not have a mime type for hal+json, this class adds hal+json to Cake\Http\Response::_mimeTypes
- *
- * @link https://github.com/cakephp/cakephp/issues/14796
- * @todo refactor https://github.com/FriendsOfCake/cakephp-csvview/blob/master/src/Plugin.php#L67
- */
 class ResponseModifier
 {
     /**

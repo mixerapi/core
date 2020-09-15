@@ -6,8 +6,8 @@ namespace MixerApi\Core\View;
 use Cake\Datasource\EntityInterface;
 
 /**
- * This class checks a Cake\ORM\Entity for properties that can be serialize and returns a ey-value pair. The key is
- * the property name and the value is the data contained by that property. The following fields are not ignored:
+ * This class checks a Cake\ORM\Entity for properties that can be serialize and returns a key-value pair. The following
+ * properties are ignored:
  *
  * - That begin with an underscore "_"
  * - Values that are not one of: array or EntityInterface
