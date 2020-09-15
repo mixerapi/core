@@ -48,5 +48,8 @@ class ModelTest extends TestCase
         $this->assertEquals('string', $model->getProperty('first_name')->getType());
         $this->assertEquals('first_name', $model->getProperty('first_name')->getName());
         $this->assertInstanceOf(ValidationSet::class, $model->getProperty('first_name')->getValidationSet());
+
+        $this->expectException(\InvalidArgumentException::class);
+        $model->getProperty('does_not_exist');
     }
 }
