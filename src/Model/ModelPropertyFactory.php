@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
 class ModelPropertyFactory
 {
     /**
-     * @var \Cake\Database\Schema\TableSchemaInterface
+     * @var \Cake\Database\Schema\TableSchema
      */
     private $schema;
 
