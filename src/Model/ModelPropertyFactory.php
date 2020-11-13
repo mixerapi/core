@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace MixerApi\Core\Model;
 
-use Cake\Database\Schema\TableSchemaInterface;
+use Cake\Database\Schema\TableSchema;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 class ModelPropertyFactory
 {
     /**
-     * @var \Cake\Database\Schema\TableSchemaInterface
+     * @var \Cake\Database\Schema\TableSchema
      */
     private $schema;
 
@@ -25,11 +25,11 @@ class ModelPropertyFactory
     private $columnName;
 
     /**
-     * @param \Cake\Database\Schema\TableSchemaInterface $schema cake TableSchema instance
+     * @param \Cake\Database\Schema\TableSchema $schema cake TableSchema instance
      * @param \Cake\ORM\Table $table cake Table instance
      * @param string $columnName the tables column name
      */
-    public function __construct(TableSchemaInterface $schema, Table $table, string $columnName)
+    public function __construct(TableSchema $schema, Table $table, string $columnName)
     {
         $this->schema = $schema;
         $this->table = $table;

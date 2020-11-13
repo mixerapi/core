@@ -9,7 +9,7 @@ use Cake\ORM\Table;
 class ModelFactory
 {
     /**
-     * @var \Cake\Database\Connection
+     * @var \Cake\Datasource\ConnectionInterface
      */
     private $connection;
 

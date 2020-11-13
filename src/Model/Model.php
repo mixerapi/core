@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace MixerApi\Core\Model;
 
-use Cake\Database\Schema\TableSchemaInterface;
+use Cake\Database\Schema\TableSchema;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Table;
 
 class Model
 {
     /**
-     * @var \Cake\Database\Schema\TableSchemaInterface
+     * @var \Cake\Database\Schema\TableSchema
      */
     private $schema;
 
@@ -30,12 +30,12 @@ class Model
     private $properties = [];
 
     /**
-     * @param \Cake\Database\Schema\TableSchemaInterface $schema cake TableSchema instance
+     * @param \Cake\Database\Schema\TableSchema $schema cake TableSchema instance
      * @param \Cake\ORM\Table $table cake Table instance
      * @param \Cake\Datasource\EntityInterface $entity cake Entity instance
      */
     public function __construct(
-        TableSchemaInterface $schema,
+        TableSchema $schema,
         Table $table,
         EntityInterface $entity
     ) {
@@ -78,9 +78,9 @@ class Model
     }
 
     /**
-     * @return \Cake\Database\Schema\TableSchemaInterface
+     * @return \Cake\Database\Schema\TableSchema
      */
-    public function getSchema(): TableSchemaInterface
+    public function getSchema(): TableSchema
     {
         return $this->schema;
     }
