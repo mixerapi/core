@@ -47,7 +47,7 @@ class ModelPropertyFactory
         return (new ModelProperty())
             ->setName($this->columnName)
             ->setType($this->schema->getColumnType($this->columnName))
-            ->setDefault($default)
+            ->setDefault((string)$default)
             ->setIsPrimaryKey($this->isPrimaryKey($vars, $this->columnName))
             ->setValidationSet($this->table->validationDefault(new Validator())->field($this->columnName));
     }
