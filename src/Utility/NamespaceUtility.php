@@ -6,6 +6,7 @@ namespace MixerApi\Core\Utility;
 use Cake\Cache\Engine\NullEngine;
 use Cake\Collection\Collection;
 use Cake\Core\Configure;
+use Kcs\ClassFinder\Finder\ComposerFinder;
 use Mouf\Composer\ClassNameMapper;
 use RuntimeException;
 use TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer;
@@ -27,11 +28,13 @@ class NamespaceUtility
     public static function findClasses(?string $namespace = null): array
     {
         $namespace = $namespace ?? Configure::read('App.namespace');
+        $finder = (new ComposerFinder())->inNamespace($namespace);
+        $classes = [];
+        foreach ($finder as $className => $reflector) {
+            $classes[] = $className;
+        }
 
-        $classNameMapper = ClassNameMapper::createFromComposerFile(null, null, true);
-        $explorer = new GlobClassExplorer($namespace, new NullEngine(), 0, $classNameMapper);
-
-        return array_keys($explorer->getClassMap());
+        return $classes;
     }
 
     /**
