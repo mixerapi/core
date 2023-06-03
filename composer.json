@@ -5,7 +5,7 @@
     "license": "MIT",
     "keywords": ["mixerapi","cakephp"],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "cakephp/cakephp": "5.x-dev",
         "kcs/class-finder": "^0.3"
     },
