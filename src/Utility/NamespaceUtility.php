@@ -20,21 +20,32 @@ use TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer;
 class NamespaceUtility
 {
     /**
-     * Finds classes using the $namespace argument and returns an array of namespaces as strings
+     * Finds classes using the $namespace argument and returns an array of namespaces as strings.
      *
-     * @param string|null $namespace A namespace such as `App\Controller`
+     * @param string|null $namespace A namespace such as `App\Controller`, if null, the `App.namespace` config is used.
      * @return string[]
      */
     public static function findClasses(?string $namespace = null): array
     {
         $namespace = $namespace ?? Configure::read('App.namespace');
+        if (str_starts_with($namespace, '\\')) {
+            $namespace = substr($namespace, 1, strlen($namespace));
+        }
+        if (str_ends_with($namespace, '\\')) {
+            $namespace = substr($namespace, 0, strlen($namespace) -1);
+        }
         $finder = (new ComposerFinder())->inNamespace($namespace);
         $classes = [];
         foreach ($finder as $className => $reflector) {
             $classes[] = $className;
         }
 
-        return $classes;
+        return array_map(function (string $namespace) {
+            if (!str_starts_with($namespace, '\\')) {
+                return '\\' . $namespace;
+            }
+            return $namespace;
+        }, $classes);
     }
 
     /**
