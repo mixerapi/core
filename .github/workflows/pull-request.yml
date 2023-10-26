@@ -36,34 +36,6 @@ jobs:
           composer analyze
           echo ${{ matrix.php-versions }}
 
-  coverage:
-    name: Code Coverage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          extensions: mbstring, intl
-
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: |
-          composer self-update
-          composer validate
-          composer install --prefer-dist --no-progress
-
-      - name: Code Coverage
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          composer global require php-coveralls/php-coveralls
-          export CODECOVERAGE=1 && vendor/bin/phpunit --coverage-clover=clover.xml
-          php-coveralls --coverage_clover=clover.xml -v     
-
   #
   # CakePHP version compatability
   #
