@@ -15,6 +15,7 @@ declare(strict_types=1);
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
 use Cake\TestSuite\Fixture\SchemaLoader;
@@ -46,3 +47,14 @@ putenv('DB_DSN=sqlite:///:memory:');
 ConnectionManager::setConfig('test', ['url' => getenv('DB_DSN')]);
 ConnectionManager::setConfig('test_custom_i18n_datasource', ['url' => getenv('DB_DSN')]);
 (new SchemaLoader())->loadInternalFile(__DIR__ . DS . 'schema.php');
+
+define('TMP', sys_get_temp_dir() . DS);
+define('CACHE', TMP . 'cache' . DS);
+Cache::setConfig([
+    '_cake_core_' => [
+        'engine' => 'File',
+        'prefix' => 'cake_core_',
+        'serialize' => true,
+        'path' => CACHE,
+    ],
+]);

@@ -10,6 +10,9 @@
         "kcs/class-finder": "^0.3"
     },
     "require-dev": {
+        "cakephp/cakephp-codesniffer": "^4.2",
+        "phpmd/phpmd": "^2.10",
+        "phpstan/phpstan": "^1.8.5",
         "phpunit/phpunit": "^10"
     },
     "autoload": {
@@ -34,5 +37,24 @@
         }
     ],
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "analyze": [
+            "@test",
+            "@phpcs",
+            "@phpstan",
+            "@phpmd"
+        ],
+        "phpcs": "phpcs --colors -p --standard=phpcs.xml src/",
+        "phpcbf": "phpcbf --colors --standard=phpcs.xml src/",
+        "phpstan": "phpstan analyse src/",
+        "test": "phpunit --colors=always",
+        "phpmd": "phpmd src/ ansi phpmd.xml",
+        "coverage": "phpunit --coverage-html coverage-reports/"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }

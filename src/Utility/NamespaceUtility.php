@@ -3,13 +3,10 @@ declare(strict_types=1);
 
 namespace MixerApi\Core\Utility;
 
-use Cake\Cache\Engine\NullEngine;
 use Cake\Collection\Collection;
 use Cake\Core\Configure;
 use Kcs\ClassFinder\Finder\ComposerFinder;
-use Mouf\Composer\ClassNameMapper;
 use RuntimeException;
-use TheCodingMachine\ClassExplorer\Glob\GlobClassExplorer;
 
 /**
  * Namespace Utilities
@@ -32,7 +29,7 @@ class NamespaceUtility
             $namespace = substr($namespace, 1, strlen($namespace));
         }
         if (str_ends_with($namespace, '\\')) {
-            $namespace = substr($namespace, 0, strlen($namespace) -1);
+            $namespace = substr($namespace, 0, strlen($namespace) - 1);
         }
         $finder = (new ComposerFinder())->inNamespace($namespace);
         $classes = [];
@@ -44,6 +41,7 @@ class NamespaceUtility
             if (!str_starts_with($namespace, '\\')) {
                 return '\\' . $namespace;
             }
+
             return $namespace;
         }, $classes);
     }
