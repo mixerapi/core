@@ -40,7 +40,6 @@
     "prefer-stable": true,
     "scripts": {
         "analyze": [
-            "@test",
             "@phpcs",
             "@phpstan",
             "@phpmd"

@@ -33,7 +33,7 @@ jobs:
           echo ${{ matrix.php-versions }}
       - name: Coverage Report
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
           composer global require php-coveralls/php-coveralls
           export CODECOVERAGE=1 && vendor/bin/phpunit --coverage-clover=clover.xml
