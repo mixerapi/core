@@ -7,13 +7,23 @@
 [![CakePHP](https://img.shields.io/badge/cakephp-^5.0-red?logo=cakephp)](https://book.cakephp.org/4/en/index.html)
 [![Minimum PHP Version](https://img.shields.io/badge/php-^8.1-8892BF.svg?logo=php)](https://php.net/)
 
-Core library for easily sharing commonly used classes and utilities across MixerAPI plugins.
+Core library for easily sharing commonly used classes and utilities across MixerAPI plugins. There is likely 
+minimal value installing this package without the full mixerapi plugin.
+
+This branch is for CakePHP 5.x only. Supported versions:
+
+| Version | Branch                                         | Cake Version | PHP Version | 
+|---------|------------------------------------------------|--------------|-------------|
+| 2.*     | master                                         | ^5.0         | ^8.1        |
+| 1.*     | [v1](https://github.com/mixerapi/core/tree/v1) | ^4.2         | ^8.0        |
 
 ## Installation
 
 ```console
 composer require mixerapi/core
 ```
+
+See the CakePHP documentation for [loading plugins](https://book.cakephp.org/5/en/plugins.html).
 
 ### Event Listener Loader
 
