@@ -20,7 +20,7 @@ class NamespaceUtility
      * Finds classes using the $namespace argument and returns an array of namespaces as strings.
      *
      * @param string|null $namespace A namespace such as `App\Controller`, if null, the `App.namespace` config is used.
-     * @return string[]
+     * @return array<string>
      */
     public static function findClasses(?string $namespace = null): array
     {

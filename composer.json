@@ -1,16 +1,16 @@
 {
     "name": "mixerapi/core",
     "description": "MixerAPI Core libraries",
-    "type": "library",
+    "type": "cakephp-plugin",
     "license": "MIT",
     "keywords": ["mixerapi","cakephp"],
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "5.x-dev",
+        "cakephp/cakephp": "^5.0",
         "kcs/class-finder": "^0.3"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "^4.2",
+        "cakephp/cakephp-codesniffer": "^5.0",
         "phpmd/phpmd": "^2.10",
         "phpstan/phpstan": "^1.8.5",
         "phpunit/phpunit": "^10"
@@ -27,7 +27,7 @@
         }
     },
     "support": {
-        "issues": "https://github.com/mixerapi/mixerapi-dev/issues",
+        "issues": "https://github.com/mixerapi/core/issues",
         "source": "https://github.com/mixerapi/core"
     },
     "authors": [
@@ -36,8 +36,6 @@
             "role": "Organization"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "analyze": [
             "@phpcs",
