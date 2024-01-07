@@ -32,7 +32,7 @@ class ModelPropertyFactory
     /**
      * @return \MixerApi\Core\Model\ModelProperty
      */
-    public function create()
+    public function create(): ModelProperty
     {
         $vars = $this->schema->__debugInfo();
         $default = $vars['columns'][$this->columnName]['default'] ?? '';

@@ -15,8 +15,10 @@ declare(strict_types=1);
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
+use Cake\TestSuite\Fixture\SchemaLoader;
 
 /**
  * Test runner bootstrap.
@@ -25,8 +27,6 @@ use Cake\Datasource\ConnectionManager;
  * unit tests in this file.
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
-
-require dirname(__DIR__) . '/config/bootstrap.php';
 
 $_SERVER['PHP_SELF'] = '/';
 
@@ -39,3 +39,22 @@ putenv('DB=sqlite');
 // does not allow the sessionid to be set after stdout
 // has been written to.
 session_id('cli');
+/*
+ * Set test database and load schema
+ * @link https://book.cakephp.org/4/en/development/testing.html#creating-test-database-schema
+ */
+putenv('DB_DSN=sqlite:///:memory:');
+ConnectionManager::setConfig('test', ['url' => getenv('DB_DSN')]);
+ConnectionManager::setConfig('test_custom_i18n_datasource', ['url' => getenv('DB_DSN')]);
+(new SchemaLoader())->loadInternalFile(__DIR__ . DS . 'schema.php');
+
+define('TMP', sys_get_temp_dir() . DS);
+define('CACHE', TMP . 'cache' . DS);
+Cache::setConfig([
+    '_cake_core_' => [
+        'engine' => 'File',
+        'prefix' => 'cake_core_',
+        'serialize' => true,
+        'path' => CACHE,
+    ],
+]);

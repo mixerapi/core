@@ -1,0 +1,95 @@
+name: Pull Request
+
+on:
+  pull_request:
+
+jobs:
+  analyze:
+    name: PHP 8.1 Test / Analysis / Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, xdebug, sqlite3
+
+      - name: PHP Version
+        run: php -v
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: |
+          composer self-update
+          composer validate
+          composer install --prefer-dist --no-progress
+
+      - name: Static Analysis
+        run: composer analyze
+      - name: Coverage Report
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          export CODECOVERAGE=1 && vendor/bin/phpunit --coverage-clover=clover.xml
+          php-coveralls --coverage_clover=clover.xml -v
+  test:
+    name: PHP 8.3 Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, intl, xdebug, sqlite3
+
+      - name: PHP Version
+        run: php -v
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: |
+          composer self-update
+          composer validate
+          composer install --prefer-dist --no-progress
+
+      - name: Test Suite
+        run: |
+          composer test
+
+  #
+  # CakePHP version compatability
+  #
+  cakephp_version_compatibility:
+    name: CakePHP ${{ matrix.version }} Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['~5.0']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, sqlite3
+
+      - name: PHP Version
+        run: php -v
+
+      - name: CakePHP ${{matrix.version}} Compatability
+        run: |
+          composer self-update
+          rm -rf composer.lock
+          composer require cakephp/cakephp:${{matrix.version}} --no-update
+          composer install --prefer-dist --no-progress
+          composer test
+

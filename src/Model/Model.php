@@ -6,6 +6,7 @@ namespace MixerApi\Core\Model;
 use Cake\Database\Schema\TableSchema;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Table;
+use InvalidArgumentException;
 
 /**
  * This acts as a decorator of sorts for CakePHP models by providing an easy way to access a models Table,
@@ -14,9 +15,9 @@ use Cake\ORM\Table;
 class Model
 {
     /**
-     * @var \MixerApi\Core\Model\ModelProperty[]
+     * @var array<\MixerApi\Core\Model\ModelProperty>
      */
-    private $properties = [];
+    private array $properties = [];
 
     /**
      * @param \Cake\Database\Schema\TableSchema $schema cake TableSchema instance
@@ -39,7 +40,7 @@ class Model
     {
         if (!isset($this->properties[$columnName])) {
             $schema = $this->schema->name();
-            throw new \InvalidArgumentException("Column `$columnName` not found in `$schema`");
+            throw new InvalidArgumentException("Column `$columnName` not found in `$schema`");
         }
 
         return $this->properties[$columnName];
@@ -82,7 +83,7 @@ class Model
     }
 
     /**
-     * @return \MixerApi\Core\Model\ModelProperty[]
+     * @return array<\MixerApi\Core\Model\ModelProperty>
      */
     public function getProperties(): array
     {

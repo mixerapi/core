@@ -27,7 +27,7 @@ class ResponseModifier
     public function listen(): void
     {
         EventManager::instance()
-            ->on('Controller.initialize', function (Event $event) {
+            ->on('Controller.initialize', function (Event $event): void {
 
                 /** @var \Cake\Controller\Controller $controller */
                 $controller = $event->getSubject();
