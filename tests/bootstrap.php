@@ -28,6 +28,22 @@ use Cake\TestSuite\Fixture\SchemaLoader;
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+// Path constants to a few helpful things.
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+define('ROOT', dirname(__DIR__));
+define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
+define('CORE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
+define('CAKE', CORE_PATH . 'src' . DS);
+define('TESTS', ROOT . DS . 'tests');
+define('APP', ROOT . DS . 'tests' . DS . 'test_app' . DS);
+define('APP_DIR', 'test_app');
+define('WEBROOT_DIR', 'webroot');
+define('WWW_ROOT', APP . 'webroot' . DS);
+
+require_once CORE_PATH . 'config/bootstrap.php';
+
 $_SERVER['PHP_SELF'] = '/';
 
 define('IS_TEST', true);

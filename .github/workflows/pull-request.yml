@@ -15,20 +15,21 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
-          extensions: mbstring, intl, xdebug, sqlite3
+          extensions: mbstring, intl, xdebug, sqlite3, xml, simplexml
+          tools: composer:v2
+          coverage: xdebug
 
-      - name: PHP Version
-        run: php -v
+      - name: Composer Check
+        run: composer validate
 
-      - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
+      - name: Install
         run: |
-          composer self-update
-          composer validate
-          composer install --prefer-dist --no-progress
+          composer install --prefer-dist --no-interaction --no-progress
+          composer update
 
       - name: Static Analysis
         run: composer analyze
+
       - name: Coverage Report
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
