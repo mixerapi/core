@@ -16,6 +16,8 @@ jobs:
         with:
           php-version: '8.1'
           extensions: mbstring, intl, xdebug, sqlite3
+          tools: composer:v2
+          coverage: xdebug
 
       - name: PHP Version
         run: php -v
