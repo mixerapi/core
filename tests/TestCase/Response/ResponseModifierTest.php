@@ -14,12 +14,14 @@ class ResponseModifierTest extends TestCase
     {
         (new ResponseModifier('jsonld', 'MixerApi/JsonLdView.JsonLd'))->listen();
         $listeners = EventManager::instance()->matchingListeners('Controller.initialize');
+        print_r($listeners);
         $names = [];
         foreach ($listeners['Controller.initialize'] as $listens) {
             foreach ($listens as $listen) {
                 $names[] = (new ReflectionFunction($listen['callable']))->name;
             }
         }
+        print_r($names);
 
         $results = array_filter($names, function ($name) {
             return strstr($name, 'MixerApi\Core\Response\{closure}');
