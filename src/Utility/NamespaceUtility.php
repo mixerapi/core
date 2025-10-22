@@ -40,10 +40,11 @@ class NamespaceUtility
             }
         }
 
-        $finder = (new ComposerFinder())
-            ->useAutoloading(false)
-            ->inNamespace($namespace)
-            ->in($paths);
+        $finder = (new ComposerFinder())->inNamespace($namespace)->in($paths);
+        if (method_exists(ComposerFinder::class, 'useAutoloading')) {
+            $finder->useAutoloading(false);
+        }
+
         $classes = [];
         foreach ($finder as $className => $reflector) {
             $classes[] = $className;
