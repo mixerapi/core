@@ -1,10 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace MixerApi\Core\Test\TestCase\Response;
 
 use Cake\Event\EventManager;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use MixerApi\Core\Response\ResponseModifier;
 use ReflectionFunction;
@@ -24,7 +23,7 @@ class ResponseModifierTest extends TestCase
             }
         }
 
-        $results = array_filter($names, function($name) {
+        $results = array_filter($names, function ($name) {
             return strstr($name, 'MixerApi\Core\Response\{closure}');
         });
 
