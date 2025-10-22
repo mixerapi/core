@@ -60,14 +60,8 @@ ConnectionManager::setConfig('test_custom_i18n_datasource', ['url' => getenv('DB
 define('TMP', sys_get_temp_dir() . DS);
 define('CACHE', TMP . 'cache' . DS);
 
-$version = (int)preg_replace('/[^0-9]/', '', Configure::version());
-$configName = '_cake_core_';
-if ($version >= 520) {
-    $configName = '_cake_translations_';
-}
-
 Cache::setConfig([
-    "$configName" => [
+    '_cake_core_' => [
         'engine' => 'File',
         'prefix' => 'cake_core_',
         'serialize' => true,
