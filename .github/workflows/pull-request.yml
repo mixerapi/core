@@ -5,7 +5,7 @@ on:
 
 jobs:
   analyze:
-    name: PHP 8.3 Test / Analysis / Coverage
+    name: PHP 8.4 Test / Analysis / Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,7 +14,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           extensions: mbstring, intl, xdebug, sqlite3, xml, simplexml
           tools: composer:v2
           coverage: xdebug
@@ -24,6 +24,8 @@ jobs:
 
       - name: Install
         run: |
+          composer self-update
+          rm -rf composer.lock
           composer install --prefer-dist --no-interaction --no-progress
           composer update
 
