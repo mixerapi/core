@@ -10,9 +10,9 @@
         "kcs/class-finder": "^0.6"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "^5.0",
+        "cakephp/cakephp-codesniffer": "~5.3.0",
         "phpmd/phpmd": "^2.10",
-        "phpstan/phpstan": "^1.8.5",
+        "phpstan/phpstan": "~1.12.0",
         "phpunit/phpunit": "^10"
     },
     "autoload": {

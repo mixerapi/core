@@ -27,7 +27,7 @@ class Model
     public function __construct(
         private TableSchema $schema,
         private Table $table,
-        private EntityInterface $entity
+        private EntityInterface $entity,
     ) {
         $this->assignProperties();
     }

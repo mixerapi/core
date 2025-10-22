@@ -25,7 +25,7 @@ class ModelPropertyFactory
         private TableSchema $schema,
         private Table $table,
         private string $columnName,
-        private EntityInterface $entity
+        private EntityInterface $entity,
     ) {
     }
 

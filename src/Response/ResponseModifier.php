@@ -34,7 +34,7 @@ class ResponseModifier
                 if ($controller->components()->has('RequestHandler')) {
                     $controller->RequestHandler->setConfig(
                         'viewClassMap.' . $this->type,
-                        $this->viewClass
+                        $this->viewClass,
                     );
                 }
             });
