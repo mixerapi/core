@@ -6,8 +6,8 @@
     "keywords": ["mixerapi","cakephp"],
     "require": {
         "php": "^8.1",
-        "cakephp/cakephp": "^5.0",
-        "kcs/class-finder": "^0.3|^0.6"
+        "cakephp/cakephp": "~5.2.0",
+        "kcs/class-finder": "^0.6"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "^5.0",

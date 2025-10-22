@@ -41,6 +41,7 @@ class NamespaceUtility
         }
 
         $finder = (new ComposerFinder())
+            ->useAutoloading(false)
             ->inNamespace($namespace)
             ->in($paths);
         $classes = [];
