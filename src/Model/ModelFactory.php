@@ -31,7 +31,7 @@ class ModelFactory
         return new Model(
             $this->connection->getSchemaCollection()->describe($this->table->getTable()),
             $this->table,
-            new $entityFqn()
+            new $entityFqn(),
         );
     }
 }
